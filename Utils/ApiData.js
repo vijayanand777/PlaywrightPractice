@@ -18,19 +18,19 @@ class ApiData
     async createOrder(orderCreationPayload)
     {
         let response={};
-        response.token=await this.getToken();
-        const orderResponce=await this.apicall.post("https://rahulshettyacademy.com/api/ecom/order/create-order",
+        response.token = await this.getToken();
+        const orderResponce = await this.apicall.post("https://rahulshettyacademy.com/api/ecom/order/create-order",
         {
           
             data:orderCreationPayload,
             headers:
             {
-                'authorization' :response.token,
-                'Content-Type':  'application/json'
+                'authorization' : response.token,
+                'Content-Type': 'application/json' 
             },
         })
-       const order=await orderResponce.json();
-       const orderId=await order.orders;
+       const order = await orderResponce.json();
+       const orderId = await order.orders;
        response.orderId=orderId;
        return response;
     }

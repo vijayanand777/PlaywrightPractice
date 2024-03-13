@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
  let email;
  test.beforeAll(async({browser})=>{
    const context= await browser.newContext();
-   const page=await context.newPage();
+   const page= await context.newPage();
    email = "anshika@gmail.com";
    await page.goto("https://rahulshettyacademy.com/client");
    await page.locator("#userEmail").fill(email);
@@ -11,11 +11,10 @@ const { test, expect } = require('@playwright/test');
    await page.locator("[value='Login']").click();
    await page.waitForLoadState('networkidle');
    await context.storageState({path:'newState.json'});
-   webContext=await browser.newContext({storageState:"newState.json"});
+   webContext= await browser.newContext({storageState:"newState.json"});
  });  
 test('@Client App login', async () => {
    //js file- Login js, DashboardPage
-   
    const productName = 'ZARA COAT 3';
    const page= await webContext.newPage();
    await page.goto("https://rahulshettyacademy.com/client");
@@ -26,7 +25,7 @@ test('@Client App login', async () => {
 //    await page.locator("#userPassword").fill("Iamking@000");
 //    await page.locator("[value='Login']").click();
  
-   const titles = await page.locator(".card-body").allTextContents();
+   const titles = await page.locator(".card-body b").allTextContents();
    console.log(titles);
    const count = await products.count();
    for (let i = 0; i < count; ++i) {
@@ -61,4 +60,21 @@ test('@Client App login', async () => {
    await expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");
    const orderId = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
    console.log(orderId);
+
+});
+
+test("checking list of products",async()=>{
+   const productName = 'ZARA COAT 3';
+   const page= await webContext.newPage();
+   await page.goto("https://rahulshettyacademy.com/client");
+   const products = await page.locator(".card-body");
+   
+//    await page.goto("https://rahulshettyacademy.com/client");
+//    await page.locator("#userEmail").fill(email);
+//    await page.locator("#userPassword").fill("Iamking@000");
+//    await page.locator("[value='Login']").click();
+ 
+   const titles = await page.locator(".card-body b").allTextContents();
+   console.log(titles);
+
 });
