@@ -6,13 +6,14 @@ const { test, expect } = require('@playwright/test');
 test('@Client App login', async ({ page }) => {
    //js file- Login js, DashboardPage
    const email = "anshika@gmail.com";
+   const password="Iamking@000";
    const productName = 'ZARA COAT 3';
    const products = page.locator(".card-body");
    await page.goto("https://rahulshettyacademy.com/client");
    await page.locator("#userEmail").fill(email);
-   await page.locator("#userPassword").fill("Iamking@000");
+   await page.locator("#userPassword").fill(password);
    await page.locator("[value='Login']").click();
-   await page.waitForLoadState('networkidle');
+   await page.waitForLoadState('networkidle'); 
    const titles = await page.locator(".card-body").allTextContents();
    console.log(titles);
    const count = await products.count();

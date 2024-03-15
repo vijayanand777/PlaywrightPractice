@@ -29,12 +29,17 @@ async function readExcel(sheet,fruitName)
 
 test("download excel from google",async({page})=>
 {
+    const updatedValue='400';
+    const searchText="Apple";
 const path="C:/Users/Soft suave/Downloads/download.xlsx";
 await page.goto("https://rahulshettyacademy.com/upload-download-test/index.html");
-const download= await page.waitForEvent('download');
+const download= page.waitForEvent('download');
 await page.locator("#downloadButton").click();
 await download;
-writeExcel(path,"Apple",400,{rowChange:0,colChange:2});
+writeExcel(path,searchText,updatedValue,{rowChange:0,colChange:2});
 await page.locator("#fileinput").click();
 await page.locator("#fileinput").setInputFiles(path);
+const textValue=page.getByText(searchText);
+const desiredRow=await page.getByRole("row").filter({has:textValue});
+expect(desiredRow.locator("#cell-4-undefined")).toHaveText(updatedValue);
 });
