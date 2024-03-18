@@ -33,6 +33,8 @@ test('@Client App login', async ({ page }) => {
    await page.locator("text=Checkout").click();
  
    await page.locator("[placeholder*='Country']").pressSequentially("ind");
+   await page.locator("").waitFor();
+   
  
    const dropdown = page.locator(".ta-results");
    await dropdown.waitFor();
