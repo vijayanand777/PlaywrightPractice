@@ -10,7 +10,7 @@ test("take Screen for full page", async({page}) =>{
     await page.locator("#displayed-text").screenshot({path:"elementscreenshot.png"});
 
 });
-test.only("take Screen for full pages", async({page}) =>{
+test("take Screen for full pages", async({page}) =>{
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
    
     expect(await page.screenshot()).toMatchSnapshot("screenshot.png");

@@ -18,6 +18,7 @@ module.exports = defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
+  // retries: 1,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -35,6 +36,10 @@ timeout:5000,
     trace: 'retain-on-failure',
     headless :false,
     screenshot :'on',
+    viewport:{ width:720,height:720},
+    ignoreHTTPSErrors: true,
+    video: "retain-on-failure"
+    
   },
 
   /* Configure projects for major browsers */
@@ -42,6 +47,9 @@ timeout:5000,
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      // use:{...devices['iPhone 6']},
+      
+    
     },
 
     // {

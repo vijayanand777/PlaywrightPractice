@@ -1,5 +1,6 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
+test.describe.configure({mode:'parallel'});
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');

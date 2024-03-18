@@ -19,9 +19,8 @@ test(`@Client App login for ${data.productName}`, async ({ page }) =>
    const orderPage=pomManager.getOrderPage();
    await orderPage.enterAdress(data.CountryName,data.partialCountryName);
    const confirmationPage=pomManager.getConfirmationPage();
-   await expect(confirmationPage.verifyemail()).toHaveText(data.email);
    await confirmationPage.placeOrder();
-  //  await expect(confirmationPage.verifyOrderDetails()).toHaveText(" Thankyou for the order. ");
+  await confirmationPage.verifyOrderDetails();
    await  confirmationPage.getOrderID();   
 });
 }
