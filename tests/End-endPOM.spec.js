@@ -2,6 +2,8 @@ import { test, expect } from "@playwright/test";
 import { POMManager } from "../PageObjects/POMManager";
 // const Data = JSON.parse(JSON.stringify(require("../Utils/DataSet.json")));
 import Data from "../Utils/DataSet.json";
+// test.describe.configure({mode:'parallel'});
+test.describe.configure({mode:'serial'});
  for ( const data of Data)
  {
 test(`@Client App login for ${data.productName}`, async ({ page }) =>
@@ -24,3 +26,9 @@ test(`@Client App login for ${data.productName}`, async ({ page }) =>
    await  confirmationPage.getOrderID();   
 });
 }
+test("UI validations ", async ({ page }) =>
+{
+   await page.goto("https://www.google.com/");
+   await expect(await page.screenshot()).toMatchSnapshot('screen.png');
+    
+});
